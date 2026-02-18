@@ -63,7 +63,7 @@ const Profile = () => {
     }
 
     try {
-      const { data } = await axios.get('http://localhost:5000/api/auth/me', {
+      const { data } = await axios.get(`${process.env.FRONTEND_URL}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(data);
@@ -148,7 +148,7 @@ const Profile = () => {
       };
 
       const { data } = await axios.put(
-        'http://localhost:5000/api/auth/profile',
+        `${process.env.FRONTEND_URL}/api/auth/profile`,
         updateData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -173,7 +173,7 @@ const Profile = () => {
 
     try {
       await axios.put(
-        'http://localhost:5000/api/auth/profile',
+        `${process.env.FRONTEND_URL}/api/auth/profile`,
         { password: formData.newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

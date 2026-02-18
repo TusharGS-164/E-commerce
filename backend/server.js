@@ -13,7 +13,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://e-commerce-backend-fa04.onrender.com/',
+  origin: process.env.FRONTEND_URL ,
   credentials: true
 }));
 app.use(express.json());

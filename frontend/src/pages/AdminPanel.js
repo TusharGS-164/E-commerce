@@ -108,10 +108,10 @@ const AdminPanel = () => {
     const token = localStorage.getItem('token');
     try {
       const [productsRes, ordersRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/products', {
+        axios.get(`${process.env.FRONTEND_URL}/api/products`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/orders', {
+        axios.get(`${process.env.FRONTEND_URL}/api/orders`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -132,7 +132,7 @@ const AdminPanel = () => {
   const fetchProducts = async () => {
     const token = localStorage.getItem('token');
     try {
-      const { data } = await axios.get('http://localhost:5000/api/products?page=1&limit=100', {
+      const { data } = await axios.get(`${process.env.FRONTEND_URL}/api/products?page=1&limit=100`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(data.products || []);
@@ -144,7 +144,7 @@ const AdminPanel = () => {
   const fetchOrders = async () => {
     const token = localStorage.getItem('token');
     try {
-      const { data } = await axios.get('http://localhost:5000/api/orders', {
+      const { data } = await axios.get(`${process.env.FRONTEND_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setOrders(data);
@@ -181,14 +181,14 @@ const AdminPanel = () => {
 
       if (editingProduct) {
         await axios.put(
-          `http://localhost:5000/api/products/${editingProduct._id}`,
+          `${process.env.FRONTEND_URL}/api/products/${editingProduct._id}`,
           productData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         alert('Product updated successfully!');
       } else {
         await axios.post(
-          'http://localhost:5000/api/products',
+          `${process.env.FRONTEND_URL}/api/products`,
           productData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -234,7 +234,7 @@ const AdminPanel = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.delete(
-        `http://localhost:5000/api/products/${productId}`,
+        `${process.env.FRONTEND_URL}/api/products/${productId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('Product deleted successfully!');
@@ -248,7 +248,7 @@ const AdminPanel = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.put(
-        `http://localhost:5000/api/orders/${orderId}/status`,
+        `${process.env.FRONTEND_URL}/api/orders/${orderId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

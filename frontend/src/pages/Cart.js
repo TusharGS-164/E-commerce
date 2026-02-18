@@ -24,7 +24,7 @@ const Cart = () => {
 
     setLoading(true);
     try {
-      const { data } = await axios.get('http://localhost:5000/api/cart', {
+      const { data } = await axios.get(`${process.env.FRONTEND_URL}/api/cart`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCart(data);
@@ -43,7 +43,7 @@ const Cart = () => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/cart/update/${itemId}`,
+       `${process.env.FRONTEND_URL}/api/cart/update/${itemId}`,
         { quantity: newQuantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -62,7 +62,7 @@ const Cart = () => {
 
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/cart/remove/${itemId}`,
+        `${process.env.FRONTEND_URL}/api/cart/remove/${itemId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setCart(data);
@@ -77,7 +77,7 @@ const Cart = () => {
     const token = localStorage.getItem('token');
 
     try {
-      await axios.delete('http://localhost:5000/api/cart/clear', {
+      await axios.delete(`${process.env.FRONTEND_URL}/api/cart/clear`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCart({ items: [] });

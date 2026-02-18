@@ -64,12 +64,12 @@ useEffect(() => {
     setError('');
     
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+      const { data } = await axios.get(`${process.env.FRONTEND_URL}/api/products/${id}`);
       setProduct(data);
       
       // Fetch related products (same category)
       const { data: relatedData } = await axios.get(
-        `http://localhost:5000/api/products?category=${data.category}`
+        `${process.env.FRONTEND_URL}/api/products?category=${data.category}`
       );
       setRelatedProducts(
         relatedData.products.filter(p => p._id !== id).slice(0, 4)
@@ -92,7 +92,7 @@ useEffect(() => {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/cart/add',
+        `${process.env.FRONTEND_URL}/api/cart/add`,
         { productId: id, quantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -118,7 +118,7 @@ useEffect(() => {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/products/${id}/reviews`,
+        `${process.env.FRONTEND_URL}/api/products/${id}/reviews`,
         reviewForm,
         { headers: { Authorization: `Bearer ${token}` } }
       );

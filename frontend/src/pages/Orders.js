@@ -37,7 +37,7 @@ const Orders = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        'http://localhost:5000/api/orders/user/myorders',
+        `${process.env.FRONTEND_URL}/api/orders/user/myorders`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setOrders(data);
@@ -94,7 +94,7 @@ const Orders = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.delete(
-        `http://localhost:5000/api/orders/${orderId}`,
+        `${process.env.FRONTEND_URL}/api/orders/${orderId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       fetchOrders();
