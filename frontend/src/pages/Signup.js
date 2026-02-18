@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "../services/api"; 
 import axios from "axios";
 import "./Signup.css";
 
@@ -25,11 +26,26 @@ function Signup() {
     setMessage("");
     setLoading(true);
 
-    try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/auth/register`,
-        { name, email, password }
-      );
+     try {
+    const { data } = await api.post('/auth/register', {
+      name,
+      email,
+      password,
+    });
+
+    setMessage(`Welcome ${data.name}! 🎉`);
+    setFormData({ name: "", email: "", password: "" });
+
+  } catch (err) {
+    if (err.response?.data?.errors) {
+      setError(err.response.data.errors[0].msg);
+    } else {
+      setError(err.response?.data?.message || "Registration failed");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
       setMessage(`Welcome ${data.name}! 🎉`);
       setFormData({ name: "", email: "", password: "" });
@@ -38,14 +54,7 @@ function Signup() {
       // setTimeout(() => {
       //   window.location.href = '/login';
       // }, 2000);
-    } catch (err) {
-      setError(
-        err.response?.data?.message || "Something went wrong. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+   
 
   return (
     <div className="signup-container">
