@@ -13,9 +13,13 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL ,
+  origin: [
+    "http://localhost:3000",
+    "https://e-commerce-g394u115f-tushar-gss-projects.vercel.app"
+  ],
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
