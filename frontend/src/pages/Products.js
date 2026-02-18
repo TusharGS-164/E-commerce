@@ -90,7 +90,8 @@ const Products = () => {
           (p) => p.stock > 0
         );
       }
-      
+      console.log("API Response:", data);
+
       setProducts(filteredProducts);
       setTotalPages(data.pages);
       setTotalProducts(data.total);
