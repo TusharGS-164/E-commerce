@@ -9,7 +9,7 @@ import './Checkout.css';
 
 // ─── Axios instance with 10-second timeout so it never hangs forever ──────────
 const api = axios.create({
-  baseURL: `${process.env.FRONTEND_URL}`,
+  baseURL: `${process.env.REACT_APP_API_URL}`,
   timeout: 10000, // 10 seconds max per request
 });
 

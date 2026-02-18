@@ -67,7 +67,7 @@ const Products = () => {
       }
       
       const { data } = await axios.get(
-        `${process.env.FRONTEND_URL}/api/products?${params.toString()}`
+        `${process.env.REACT_APP_API_URL}/api/products?${params.toString()}`
       );
       
       let filteredProducts = data.products;
@@ -161,7 +161,7 @@ const Products = () => {
 
     try {
       await axios.post(
-        `${process.env.FRONTEND_URL}/api/cart/add`,
+        `${process.env.REACT_APP_API_URL}/api/cart/add`,
         { productId, quantity: 1 },
         { headers: { Authorization: `Bearer ${token}` } }
       );
