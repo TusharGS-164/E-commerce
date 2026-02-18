@@ -1,0 +1,465 @@
+/* Shared styles for Returns, Shipping, and Privacy pages */
+
+.returns-page,
+.shipping-page,
+.privacy-page {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* Hero Sections */
+.returns-hero,
+.shipping-hero,
+.privacy-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.hero-icon {
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.returns-hero h1,
+.shipping-hero h1,
+.privacy-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.returns-hero p,
+.shipping-hero p,
+.privacy-hero p {
+  font-size: 1.2rem;
+  opacity: 0.95;
+}
+
+/* Quick Summary Cards */
+.quick-summary {
+  padding: 60px 0;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.summary-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.summary-card svg {
+  color: #667eea;
+  margin-bottom: 20px;
+}
+
+.summary-card h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.summary-card p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Policy Sections */
+.policy-section {
+  background: white;
+  padding: 50px 60px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.policy-section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.policy-content h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin: 30px 0 15px;
+}
+
+.policy-content p {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.policy-content ul,
+.policy-content ol {
+  color: #666;
+  line-height: 1.8;
+  margin: 15px 0 25px 25px;
+}
+
+.policy-content li {
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+/* Steps Grid */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.step-card {
+  background: #f8f9fa;
+  padding: 30px 25px;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.step-card h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.step-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* Tables */
+.refund-table,
+.shipping-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.refund-table thead,
+.shipping-table thead {
+  background: #f8f9fa;
+}
+
+.refund-table th,
+.shipping-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #e1e8ed;
+}
+
+.refund-table td,
+.shipping-table td {
+  padding: 15px;
+  color: #666;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.refund-table tr:last-child td,
+.shipping-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* FAQ List */
+.faq-list {
+  margin-top: 30px;
+}
+
+.faq-item {
+  background: #f8f9fa;
+  padding: 25px 30px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 4px solid #667eea;
+}
+
+.faq-item h4 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.faq-item p {
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Contact CTA */
+.contact-cta {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 40px;
+  border-radius: 16px;
+  margin-bottom: 60px;
+}
+
+.cta-content {
+  text-align: center;
+  color: white;
+}
+
+.cta-content svg {
+  margin-bottom: 20px;
+}
+
+.cta-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.cta-content p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 1.05rem;
+}
+
+.cta-btn.primary {
+  background: white;
+  color: #667eea;
+}
+
+.cta-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.cta-btn.secondary:hover {
+  background: white;
+  color: #667eea;
+}
+
+/* Info Boxes */
+.info-box {
+  background: #e8f5e9;
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin: 25px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.info-box svg {
+  color: #4caf50;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-box p {
+  color: #2e7d32;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.warning-box {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin: 25px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.warning-box svg {
+  color: #ffc107;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.warning-box p {
+  color: #856404;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Zone Cards */
+.zone-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.zone-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  border-top: 4px solid #667eea;
+}
+
+.zone-card h4 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.zone-card p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Privacy Sections */
+.privacy-toc {
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.privacy-toc h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.privacy-toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.privacy-toc li {
+  margin-bottom: 12px;
+}
+
+.privacy-toc a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.privacy-toc a:hover {
+  color: #5568d3;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zone-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .returns-hero h1,
+  .shipping-hero h1,
+  .privacy-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .returns-hero p,
+  .shipping-hero p,
+  .privacy-hero p {
+    font-size: 1rem;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .policy-section {
+    padding: 30px 25px;
+  }
+
+  .policy-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .refund-table,
+  .shipping-table {
+    font-size: 0.9rem;
+  }
+
+  .refund-table th,
+  .refund-table td,
+  .shipping-table th,
+  .shipping-table td {
+    padding: 10px;
+  }
+}

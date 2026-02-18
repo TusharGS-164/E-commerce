@@ -1,0 +1,259 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Footer.css  —  TechNest e-commerce footer
+   Matches project design system: purple gradient #667eea → #764ba2
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Footer wrapper ───────────────────────────────────────────────────────── */
+.footer {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #e2e8f0;
+  margin-top: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top accent line */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Decorative background glow */
+.footer::after {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Main grid ────────────────────────────────────────────────────────────── */
+.footer-container {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  gap: 3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Each section ─────────────────────────────────────────────────────────── */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Brand / logo ─────────────────────────────────────────────────────────── */
+.footer-section .logo {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.footer-section > p {
+  color: #94a3b8;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  max-width: 280px;
+  margin-bottom: 1.75rem;
+}
+
+/* Newsletter / contact badge */
+.footer-section > p + * {
+  margin-top: auto;
+}
+
+/* ── Section headings ─────────────────────────────────────────────────────── */
+.footer-section h3 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #667eea;
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-bottom: 0.65rem;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+/* ── Links list ───────────────────────────────────────────────────────────── */
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.footer-section ul li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0;
+  transition: color 0.2s, gap 0.2s;
+  position: relative;
+}
+
+/* Arrow on hover */
+.footer-section ul li a::before {
+  content: '→';
+  font-size: 0.75rem;
+  color: #667eea;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.footer-section ul li a:hover {
+  color: #c4b5fd;
+  gap: 0.7rem;
+}
+
+.footer-section ul li a:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Social icons (when uncommented) ─────────────────────────────────────── */
+.social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.25s;
+  width: fit-content;
+}
+
+.social-icons a:hover {
+  color: #fff;
+  background: rgba(102,126,234,0.15);
+  border-color: rgba(102,126,234,0.4);
+  transform: translateX(4px);
+}
+
+/* ── Divider ──────────────────────────────────────────────────────────────── */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 1.4rem 2rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-bottom p {
+  font-size: 0.83rem;
+  color: #475569;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.footer-bottom p a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.footer-bottom p a:hover {
+  text-decoration: underline;
+}
+
+/* ── Shimmer animation ────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ── Responsive: tablet ───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem 2.5rem;
+  }
+
+  /* Brand section spans full width on tablet */
+  .footer-section:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer-section > p {
+    max-width: 100%;
+  }
+}
+
+/* ── Responsive: mobile ───────────────────────────────────────────────────── */
+@media (max-width: 580px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.5rem 1.25rem 2rem;
+  }
+
+  .footer-section:first-child {
+    grid-column: 1;
+  }
+
+  .footer-section .logo {
+    font-size: 1.65rem;
+  }
+
+  .footer-section h3 {
+    font-size: 0.75rem;
+  }
+
+  .footer-bottom {
+    padding: 1.2rem 1.25rem;
+  }
+
+  .footer-bottom p {
+    font-size: 0.78rem;
+  }
+}
