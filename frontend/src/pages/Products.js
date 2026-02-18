@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, callback } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
@@ -46,45 +46,66 @@ const Products = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, );
+  }, [fetchProducts]);
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    setError('');
-    
-    try {
-      const params = new URLSearchParams({
-        page: currentPage,
-        ...(filters.search && { keyword: filters.search }),
-        ...(filters.category && filters.category !== 'All Categories' && { category: filters.category }),
-        ...(filters.sortBy && { sortBy: filters.sortBy })
-      });
+ const fetchProducts = useCallback(async () => {
+  setLoading(true);
+  setError('');
 
-      const { data } = await axios.get(`http://localhost:5000/api/products?${params}`);
-      
-      let filteredProducts = data.products;
+  try {
+    const params = new URLSearchParams();
 
-      // Client-side filtering for price and stock
-      if (filters.minPrice) {
-        filteredProducts = filteredProducts.filter(p => p.price >= parseFloat(filters.minPrice));
-      }
-      if (filters.maxPrice) {
-        filteredProducts = filteredProducts.filter(p => p.price <= parseFloat(filters.maxPrice));
-      }
-      if (filters.inStock) {
-        filteredProducts = filteredProducts.filter(p => p.stock > 0);
-      }
+    params.append("page", currentPage);
 
-      setProducts(filteredProducts);
-      setTotalPages(data.pages);
-      setTotalProducts(data.total);
-    } catch (err) {
-      setError('Failed to load products. Please try again.');
-      console.error(err);
-    } finally {
-      setLoading(false);
+    if (filters.search) {
+      params.append("keyword", filters.search);
     }
-  };
+
+    if (filters.category && filters.category !== "All Categories") {
+      params.append("category", filters.category);
+    }
+
+    if (filters.sortBy) {
+      params.append("sortBy", filters.sortBy);
+    }
+
+    const { data } = await axios.get(
+      `http://localhost:5000/api/products?${params.toString()}`
+    );
+
+    let filteredProducts = data.products;
+
+    // Client-side filtering
+    if (filters.minPrice) {
+      filteredProducts = filteredProducts.filter(
+        (p) => p.price >= parseFloat(filters.minPrice)
+      );
+    }
+
+    if (filters.maxPrice) {
+      filteredProducts = filteredProducts.filter(
+        (p) => p.price <= parseFloat(filters.maxPrice)
+      );
+    }
+
+    if (filters.inStock) {
+      filteredProducts = filteredProducts.filter(
+        (p) => p.stock > 0
+      );
+    }
+
+    setProducts(filteredProducts);
+    setTotalPages(data.pages);
+    setTotalProducts(data.total);
+
+  } catch (err) {
+    setError("Failed to load products. Please try again.");
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+
+}, [currentPage, filters]);
 
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
