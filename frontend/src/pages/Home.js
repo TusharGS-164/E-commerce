@@ -18,15 +18,16 @@ const Home = () => {
   }, []);
 
   const fetchFeaturedProducts = async () => {
-    try {
-      const { data } = await api.get('/products/featured');
-      setFeaturedProducts(data);
-    } catch (error) {
-      toast.error('Failed to load products');
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    const { data } = await api.get('/api/products/featured');
+    setFeaturedProducts(data);
+  } catch (error) {
+    toast.error('Failed to load products');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleAddToCart = async (productId) => {
     if (!user) {
