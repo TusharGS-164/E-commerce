@@ -49,7 +49,7 @@ const ProductDetail = () => {
     const userData = JSON.parse(localStorage.getItem('user'));
     setUser(userData);
     fetchProduct();
-  }, [id]);
+  }, );
 
   const fetchProduct = async () => {
     setLoading(true);

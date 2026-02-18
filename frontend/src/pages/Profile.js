@@ -38,7 +38,7 @@ const Profile = () => {
 
   const [addresses, setAddresses] = useState([]);
   const [showAddressForm, setShowAddressForm] = useState(false);
-  const [editingAddress, setEditingAddress] = useState(null);
+  // const [editingAddress, setEditingAddress] = useState(null);
   const [newAddress, setNewAddress] = useState({
     street: '',
     city: '',
@@ -53,7 +53,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, []);
+  }, );
 
   const fetchUserProfile = async () => {
     const token = localStorage.getItem('token');

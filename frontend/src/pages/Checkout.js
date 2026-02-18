@@ -45,7 +45,7 @@ const Checkout = () => {
     const token = localStorage.getItem('token');
     if (!token) { navigate('/login'); return; }
     fetchCart();
-  }, []);
+  }, );
 
   const fetchCart = async () => {
     try {

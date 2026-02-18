@@ -13,7 +13,7 @@ const Cart = () => {
 
   useEffect(() => {
     fetchCart();
-  }, []);
+  }, );
 
   const fetchCart = async () => {
     const token = localStorage.getItem('token');

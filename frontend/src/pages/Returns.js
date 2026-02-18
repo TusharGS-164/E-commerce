@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RefreshCw, Package, Truck, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { RefreshCw,  Truck, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import './Returns.css';
 
 const Returns = () => {

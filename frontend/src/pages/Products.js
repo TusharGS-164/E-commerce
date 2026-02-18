@@ -46,7 +46,7 @@ const Products = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [currentPage, filters]);
+  }, );
 
   const fetchProducts = async () => {
     setLoading(true);

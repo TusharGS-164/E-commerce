@@ -3,12 +3,12 @@ import { Users, ShoppingBag, Star, Award, Shield, Truck, Headphones, MapPin, Pho
 import './About.css';
 
 const About = () => {
-  const stats = [
-    { icon: <Users size={40} />, number: '50,000+', label: 'Happy Customers' },
-    { icon: <ShoppingBag size={40} />, number: '10,000+', label: 'Products Available' },
-    { icon: <Star size={40} />, number: '4.8/5', label: 'Average Rating' },
-    { icon: <Award size={40} />, number: '8+', label: 'Years in Business' },
-  ];
+  // const stats = [
+  //   { icon: <Users size={40} />, number: '50,000+', label: 'Happy Customers' },
+  //   { icon: <ShoppingBag size={40} />, number: '10,000+', label: 'Products Available' },
+  //   { icon: <Star size={40} />, number: '4.8/5', label: 'Average Rating' },
+  //   { icon: <Award size={40} />, number: '8+', label: 'Years in Business' },
+  // ];
 
   const values = [
     {

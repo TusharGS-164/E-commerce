@@ -15,10 +15,10 @@ import {
   X,
   Save,
   CheckCircle,
-  AlertCircle,
+  // AlertCircle,
   Search,
-  Filter,
-  Download
+  // Filter,
+  // Download
 } from 'lucide-react';
 import './AdminPanel.css';
 
@@ -74,7 +74,7 @@ const AdminPanel = () => {
 
   useEffect(() => {
     checkAdminAccess();
-  }, []);
+  }, );
 
   useEffect(() => {
     if (user?.role === 'admin') {

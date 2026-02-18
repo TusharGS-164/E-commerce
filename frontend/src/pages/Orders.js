@@ -25,7 +25,7 @@ const Orders = () => {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, );
 
   const fetchOrders = async () => {
     const token = localStorage.getItem('token');
