@@ -15,10 +15,11 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://e-commerce-g394u115f-tushar-gss-projects.vercel.app"
+    "https://e-commerce-ebe0doe5m-tushar-gss-projects.vercel.app"
   ],
   credentials: true
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
