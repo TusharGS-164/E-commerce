@@ -41,15 +41,23 @@ const ProductDetail = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   // User and cart
-  const [user, setUser] = useState(null);
+  const [user, ] = useState(null);
   const [addingToCart, setAddingToCart] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
 
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    setUser(userData);
-    fetchProduct();
-  }, );
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      const res = await axios.get(`/api/products/${id}`);
+      setProduct(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchProduct();
+}, [id]);
+
 
   const fetchProduct = async () => {
     setLoading(true);

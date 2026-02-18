@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, ShoppingBag, Star, Award, Shield, Truck, Headphones, MapPin, Phone, Mail } from 'lucide-react';
+import {  Shield, Truck, Headphones, MapPin, Phone, Mail } from 'lucide-react';
 import './About.css';
 
 const About = () => {
