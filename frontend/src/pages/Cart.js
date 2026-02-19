@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, ArrowLeft } from 'lucide-react';
 import './Cart.css';
 
@@ -13,40 +13,36 @@ const Cart = () => {
 
   useEffect(() => {
     fetchCart();
-  }, );
+  }, []);
 
   const fetchCart = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   navigate('/login');
+    //   return;
+    // }
 
+  
+  try {
     setLoading(true);
-    try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/cart`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setCart(data);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to load cart');
-    } finally {
-      setLoading(false);
-    }
-  };
+    const { data } = await api.get('/cart');
+    setCart(data);
+  } catch (err) {
+    setError(err.response?.data?.message || 'Failed to load cart');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const updateQuantity = async (itemId, newQuantity) => {
     if (newQuantity < 1) return;
 
     setUpdatingItem(itemId);
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     try {
-      const { data } = await axios.put(
-       `${process.env.REACT_APP_API_URL}/api/cart/update/${itemId}`,
-        { quantity: newQuantity },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const { data } = await api.put(`/cart/update/${itemId}`,{quantity : newQuantity});
       setCart(data);
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to update quantity');
@@ -58,13 +54,10 @@ const Cart = () => {
   const removeItem = async (itemId) => {
     if (!window.confirm('Remove this item from cart?')) return;
 
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     try {
-      const { data } = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/cart/remove/${itemId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const { data } = await api.delete(`/cart/remove/${itemId}`);
       setCart(data);
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to remove item');
@@ -74,12 +67,10 @@ const Cart = () => {
   const clearCart = async () => {
     if (!window.confirm('Clear entire cart?')) return;
 
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/cart/clear`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await api.delete('/cart/clear');
       setCart({ items: [] });
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to clear cart');

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../services/api';
+
 import {
   ShoppingCart,
   Heart,
@@ -48,8 +50,9 @@ const ProductDetail = () => {
 useEffect(() => {
   const fetchProduct = async () => {
     try {
-      const res = await axios.get(`/api/products/${id}`);
-      setProduct(res.data);
+    const { data } = await api.get(`/products/${id}`);
+setProduct(data);
+
     } catch (err) {
       console.log(err);
     }
@@ -64,16 +67,16 @@ useEffect(() => {
     setError('');
     
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/products/${id}`);
-      setProduct(data);
-      
+   const { data } = await api.get(`/products/${id}`);
+setProduct(data);
+
       // Fetch related products (same category)
-      const { data: relatedData } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/products?category=${data.category}`
-      );
-      setRelatedProducts(
-        relatedData.products.filter(p => p._id !== id).slice(0, 4)
-      );
+     const { data: relatedData } = await api.get('/products', {
+  params: { category: data.category }
+});
+
+    setRelatedProducts(relatedData.products || relatedData);
+
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to load product');
     } finally {
@@ -91,11 +94,11 @@ useEffect(() => {
     const token = localStorage.getItem('token');
 
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/cart/add`,
-        { productId: id, quantity },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+    await api.post('/cart/add', {
+  productId: id,
+  quantity,
+});
+
       setAddedToCart(true);
       setTimeout(() => setAddedToCart(false), 3000);
     } catch (err) {
@@ -117,11 +120,8 @@ useEffect(() => {
     const token = localStorage.getItem('token');
 
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/products/${id}/reviews`,
-        reviewForm,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+     await api.post(`/products/${id}/reviews`, reviewForm);
+
       
       alert('Review submitted successfully!');
       setShowReviewForm(false);

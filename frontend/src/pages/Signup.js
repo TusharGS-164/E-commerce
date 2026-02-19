@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../services/api"; 
-import axios from "axios";
+// import axios from "axios";
 import "./Signup.css";
 
 function Signup() {
@@ -47,13 +47,13 @@ function Signup() {
   }
 };
 
-      setMessage(`Welcome ${data.name}! 🎉`);
-      setFormData({ name: "", email: "", password: "" });
-      
-      // Optional: Redirect to login or home after 2 seconds
-      // setTimeout(() => {
-      //   window.location.href = '/login';
-      // }, 2000);
+      // setMessage(`Welcome ${data.name}! 🎉`);
+      // setFormData({ name: "", email: "", password: "" });
+      // 
+     // Optional: Redirect to login or home after 2 seconds
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000);
    
 
   return (

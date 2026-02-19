@@ -1,6 +1,6 @@
 import React, { useState, useEffect ,useCallback} from 'react';
 import { useSearchParams, useNavigate,  } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import './Products.css';
@@ -12,7 +12,9 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  
+  const [page, setPage] = useState(1);
+const [sortBy, setSortBy] = useState('newest');
+
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -66,10 +68,10 @@ const Products = () => {
         params.append("sortBy", filters.sortBy);
       }
       
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/products?${params.toString()}`
-      );
-      
+const { data } = await api.get('/products', {
+  params: { page, sortBy }
+});
+
       let filteredProducts = data.products;
       
       // Client-side filtering
@@ -161,11 +163,11 @@ const Products = () => {
     }
 
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/cart/add`,
-        { productId, quantity: 1 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await await api.post('/cart/add', {
+  productId,
+  quantity: 1
+});
+
       alert('Added to cart!');
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to add to cart');

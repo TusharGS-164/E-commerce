@@ -19,8 +19,9 @@ const Home = () => {
 
   const fetchFeaturedProducts = async () => {
   try {
-    const { data } = await api.get('/api/products/featured');
-    setFeaturedProducts(data);
+    const { data } = await api.get('/products/featured');
+    setFeaturedProducts(data.products);
+   
   } catch (error) {
     toast.error('Failed to load products');
   } finally {
@@ -78,7 +79,7 @@ const Home = () => {
             <div className="spinner"></div>
           ) : (
             <div className="products-grid">
-              {featuredProducts.map(product => (
+              {featuredProducts?.map(product => (
                 <ProductCard
                   key={product._id}
                   product={product}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import api from '../services/api';
 import {
   LayoutDashboard,
   Package,
@@ -86,7 +87,7 @@ const AdminPanel = () => {
   }, [activeTab, user]);
 
   const checkAdminAccess = async () => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     const userData = JSON.parse(localStorage.getItem('user'));
 
     if (!token || !userData) {
@@ -105,16 +106,15 @@ const AdminPanel = () => {
   };
 
   const fetchDashboardStats = async () => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
       const [productsRes, ordersRes] = await Promise.all([
-        axios.get(`${process.env.REACT_APP_API_URL}/api/products`, {
-          headers: { Authorization: `Bearer ${token}` }
-        }),
-        axios.get(`${process.env.REACT_APP_API_URL}/api/orders`, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-      ]);
+  api.get('/products'),
+  api.get('/orders')
+]);
+setProducts(productsRes.data);
+setOrders(ordersRes.data);
+
 
       const revenue = ordersRes.data.reduce((sum, order) => sum + order.totalPrice, 0);
       
@@ -130,24 +130,27 @@ const AdminPanel = () => {
   };
 
   const fetchProducts = async () => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/products?page=1&limit=100`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setProducts(data.products || []);
+     const { data } = await api.get('/products', {
+  params: {
+    page: 1,
+    limit: 100
+  }
+});
+
+     setProducts(productsRes.data);
     } catch (err) {
       console.error('Failed to fetch products:', err);
     }
   };
 
   const fetchOrders = async () => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/orders`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setOrders(data);
+      const { data } = await api.get('/orders');
+
+      setOrders(ordersRes.data);
     } catch (err) {
       console.error('Failed to fetch orders:', err);
     }
@@ -170,7 +173,7 @@ const AdminPanel = () => {
   };
 
   const handleCreateProduct = async () => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
       const productData = {
         ...productForm,
@@ -180,18 +183,12 @@ const AdminPanel = () => {
       };
 
       if (editingProduct) {
-        await axios.put(
-          `${process.env.REACT_APP_API_URL}/api/products/${editingProduct._id}`,
-          productData,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+       await api.put(`/products/${editingProduct._id}`, productData);
+
         alert('Product updated successfully!');
       } else {
-        await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/products`,
-          productData,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+       await api.post('/products', productData);
+
         alert('Product created successfully!');
       }
 
@@ -231,12 +228,10 @@ const AdminPanel = () => {
   const handleDeleteProduct = async (productId) => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
 
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/products/${productId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await api.delete(`/products/${productId}`);
+
       alert('Product deleted successfully!');
       fetchProducts();
     } catch (err) {
@@ -245,13 +240,12 @@ const AdminPanel = () => {
   };
 
   const handleUpdateOrderStatus = async (orderId, newStatus) => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
-      await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/orders/${orderId}/status`,
-        { status: newStatus },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+     await api.put(`/orders/${orderId}/status`, {
+  status: newStatus,
+});
+
       alert('Order status updated!');
       fetchOrders();
     } catch (err) {

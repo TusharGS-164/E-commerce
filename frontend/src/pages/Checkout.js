@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../services/api';
+
 import {
   CreditCard, MapPin, Check, ShoppingBag,
   ArrowLeft, AlertCircle, Smartphone, Wallet, CheckCircle
@@ -8,10 +10,10 @@ import {
 import './Checkout.css';
 
 // ─── Axios instance with 10-second timeout so it never hangs forever ──────────
-const api = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}`,
-  timeout: 10000, // 10 seconds max per request
-});
+// const api = axios.create({
+//   baseURL: `${process.env.REACT_APP_API_URL}`,
+//   timeout: 10000, // 10 seconds max per request
+// });
 
 // Auto-attach auth token to every request
 api.interceptors.request.use((config) => {

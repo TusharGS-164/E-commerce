@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../services/api';
+
 import { 
   Package, 
   Truck, 
@@ -36,10 +38,8 @@ const Orders = () => {
 
     setLoading(true);
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/orders/user/myorders`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+    const { data } = await api.get('/orders/user/myorders');
+
       setOrders(data);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to load orders');
@@ -93,10 +93,8 @@ const Orders = () => {
 
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/orders/${orderId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+    await api.delete(`/orders/${orderId}`);
+
       fetchOrders();
       alert('Order cancelled successfully');
     } catch (err) {

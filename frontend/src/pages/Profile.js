@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../services/api';
+
 import {
   User,
   Mail,
@@ -63,9 +65,8 @@ const Profile = () => {
     }
 
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const { data } = await api.get('/auth/me');
+
       setUser(data);
       setFormData({
         name: data.name || '',
@@ -147,11 +148,8 @@ const Profile = () => {
         phone: formData.phone
       };
 
-      const { data } = await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/auth/profile`,
-        updateData,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+    const { data } = await api.put('/auth/profile', updateData);
+
 
       localStorage.setItem('user', JSON.stringify(data));
       setUser(data);
@@ -172,11 +170,10 @@ const Profile = () => {
     const token = localStorage.getItem('token');
 
     try {
-      await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/auth/profile`,
-        { password: formData.newPassword },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const { data } = await api.put('/auth/profile', {
+  password: formData.newPassword,
+});
+
 
       setFormData(prev => ({
         ...prev,
