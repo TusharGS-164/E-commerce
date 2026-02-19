@@ -15,7 +15,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://e-commerce-ebe0doe5m-tushar-gss-projects.vercel.app"
+    "https://e-commerce-fawn-five-87.vercel.app"
   ],
   credentials: true
 }));
