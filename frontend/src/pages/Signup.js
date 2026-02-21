@@ -20,13 +20,13 @@ function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setMessage("");
-    setLoading(true);
+ const onSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setMessage("");
+  setLoading(true);
 
-     try {
+  try {
     const { data } = await api.post('/auth/register', {
       name,
       email,
@@ -35,6 +35,11 @@ function Signup() {
 
     setMessage(`Welcome ${data.name}! 🎉`);
     setFormData({ name: "", email: "", password: "" });
+
+    // ✅ Redirect AFTER success
+    setTimeout(() => {
+      window.location.href = '/login';
+    }, 2000);
 
   } catch (err) {
     if (err.response?.data?.errors) {
@@ -46,14 +51,13 @@ function Signup() {
     setLoading(false);
   }
 };
-
       // setMessage(`Welcome ${data.name}! 🎉`);
       // setFormData({ name: "", email: "", password: "" });
       // 
      // Optional: Redirect to login or home after 2 seconds
-      setTimeout(() => {
-        window.location.href = '/login';
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.href = '/login';
+      // }, 2000);
    
 
   return (
