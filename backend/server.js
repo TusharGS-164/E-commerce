@@ -15,7 +15,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://e-commerce-flax-five-80.vercel.app/"
+    "https://e-commerce-flax-five-80.vercel.app"
   ],
   credentials: true
 }));
