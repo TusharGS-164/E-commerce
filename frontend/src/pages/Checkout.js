@@ -51,7 +51,7 @@ const Checkout = () => {
 
   const fetchCart = async () => {
     try {
-      const { data } = await api.get('/api/cart');
+      const { data } = await api.get('/cart');
       setCart(data);
     } catch (err) {
       setOrderError('Could not load your cart. Please refresh the page.');
@@ -164,7 +164,7 @@ const Checkout = () => {
         totalPrice:    total()
       };
 
-      const { data: order } = await api.post('/api/orders', orderPayload);
+      const { data: order } = await api.post('/orders', orderPayload);
 
       // ── Step B: mark as paid (skip for COD) ──────────────────────────────
       if (formData.paymentMethod !== 'cod') {
