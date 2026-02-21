@@ -155,7 +155,7 @@ const { data } = await api.get('/products', {
   };
 
   const handleAddToCart = async (productId) => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     if (!token) {
       alert('Please login to add items to cart');
       navigate('/login');

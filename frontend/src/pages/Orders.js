@@ -30,7 +30,7 @@ const Orders = () => {
   }, );
 
   const fetchOrders = async () => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     if (!token) {
       navigate('/login');
       return;
@@ -91,7 +91,7 @@ const Orders = () => {
   const handleCancelOrder = async (orderId) => {
     if (!window.confirm('Are you sure you want to cancel this order?')) return;
 
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     try {
     await api.delete(`/orders/${orderId}`);
 

@@ -58,7 +58,7 @@ const Profile = () => {
   }, );
 
   const fetchUserProfile = async () => {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     if (!token) {
       navigate('/login');
       return;
@@ -139,7 +139,7 @@ const Profile = () => {
     if (!validatePersonalInfo()) return;
 
     setSaving(true);
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     try {
       const updateData = {
@@ -167,7 +167,7 @@ const Profile = () => {
     if (!validatePassword()) return;
 
     setSaving(true);
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     try {
       const { data } = await api.put('/auth/profile', {

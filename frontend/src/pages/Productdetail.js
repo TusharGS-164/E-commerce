@@ -91,7 +91,7 @@ setProduct(data);
     }
 
     setAddingToCart(true);
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     try {
     await api.post('/cart/add', {
@@ -117,7 +117,7 @@ setProduct(data);
     }
 
     setSubmittingReview(true);
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     try {
      await api.post(`/products/${id}/reviews`, reviewForm);
