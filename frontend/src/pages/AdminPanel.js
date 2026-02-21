@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import api from '../services/api';
 import {
   LayoutDashboard,
@@ -87,7 +87,7 @@ const AdminPanel = () => {
   }, [activeTab, user]);
 
   const checkAdminAccess = async () => {
-    // const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const userData = JSON.parse(localStorage.getItem('user'));
 
     if (!token || !userData) {
@@ -129,32 +129,32 @@ setOrders(ordersRes.data);
     }
   };
 
-  const fetchProducts = async () => {
-    // const token = localStorage.getItem('token');
-    try {
-     const { data } = await api.get('/products', {
-  params: {
-    page: 1,
-    limit: 100
+const fetchProducts = async () => {
+  try {
+    const { data } = await api.get('/products', {
+      params: {
+        page: 1,
+        limit: 100
+      }
+    });
+
+    // ✅ If backend returns { products: [...] }
+    setProducts(data.products || []);
+
+  } catch (err) {
+    console.error('Failed to fetch products:', err);
+    setProducts([]);   // prevent crash
   }
-});
+};
 
-     setProducts(productsRes.data);
-    } catch (err) {
-      console.error('Failed to fetch products:', err);
-    }
-  };
-
-  const fetchOrders = async () => {
-    // const token = localStorage.getItem('token');
-    try {
-      const { data } = await api.get('/orders');
-
-      setOrders(ordersRes.data);
-    } catch (err) {
-      console.error('Failed to fetch orders:', err);
-    }
-  };
+ const fetchOrders = async () => {
+  try {
+    const { data } = await api.get('/orders');
+    setOrders(data);
+  } catch (err) {
+    console.error('Failed to fetch orders:', err);
+  }
+};
 
   const fetchUsers = async () => {
     // Mock users - would need actual users endpoint

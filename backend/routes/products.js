@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/featured', async (req, res) => {
   try {
-    const products = await Product.find({ featured: true }).limit(8);
+    const products = await Product.find({ featured: true }).limit(10);
 
     res.json({
       products

@@ -112,7 +112,7 @@ const Header = () => {
         <Link to="/" className="header-logo">
           <span className="header-logo-icon">⚡</span>
           <span className="header-logo-text">
-           TechNest123
+           TechNest
           </span>
         </Link>
 

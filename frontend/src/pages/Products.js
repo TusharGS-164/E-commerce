@@ -46,69 +46,51 @@ const Products = () => {
     'Smart Home'
   ];
 
-  
   const fetchProducts = useCallback(async () => {
-    setLoading(true);
-    setError('');
-    
-    try {
-      const params = new URLSearchParams();
-      
-      params.append("page", currentPage);
-      
-      if (filters.search) {
-        params.append("keyword", filters.search);
-      }
-      
-      if (filters.category && filters.category !== "All Categories") {
-        params.append("category", filters.category);
-      }
-      
-      if (filters.sortBy) {
-        params.append("sortBy", filters.sortBy);
-      }
-      
-const { data } = await api.get('/products', {
-  params: { 
-    page: currentPage,
-    sortBy: filters.sortBy 
-  }
-});
+  setLoading(true);
+  setError('');
 
-      let filteredProducts = data.products;
-      
-      // Client-side filtering
-      if (filters.minPrice) {
-        filteredProducts = filteredProducts.filter(
-          (p) => p.price >= parseFloat(filters.minPrice)
-        );
-      }
-      
-      if (filters.maxPrice) {
-        filteredProducts = filteredProducts.filter(
-          (p) => p.price <= parseFloat(filters.maxPrice)
-        );
-      }
-      
-      if (filters.inStock) {
-        filteredProducts = filteredProducts.filter(
-          (p) => p.stock > 0
-        );
-      }
-      console.log("API Response:", data);
+  try {
+    const queryParams = {
+      page: currentPage,
+      sortBy: filters.sortBy,
+    };
 
-      setProducts(filteredProducts);
-      setTotalPages(data.pages);
-      setTotalProducts(data.total);
-      
-    } catch (err) {
-      setError("Failed to load products. Please try again.");
-      console.error(err);
-    } finally {
-      setLoading(false);
+    if (filters.search) {
+      queryParams.keyword = filters.search;
     }
-    
-  }, [currentPage, filters]);
+
+    if (filters.category && filters.category !== 'All Categories') {
+      queryParams.category = filters.category;
+    }
+
+    if (filters.minPrice) {
+      queryParams.minPrice = filters.minPrice;
+    }
+
+    if (filters.maxPrice) {
+      queryParams.maxPrice = filters.maxPrice;
+    }
+
+    if (filters.inStock) {
+      queryParams.inStock = true;
+    }
+
+    const { data } = await api.get('/products', {
+      params: queryParams,
+    });
+
+    setProducts(data.products || []);
+    setTotalPages(data.pages || 1);
+    setTotalProducts(data.total || 0);
+
+  } catch (err) {
+    setError('Failed to load products. Please try again.');
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+}, [currentPage, filters]);
   
   useEffect(() => {
     fetchProducts();
