@@ -43,11 +43,14 @@ const Checkout = () => {
   });
 
   // ─── On mount: redirect if not logged in, then load cart ──────────────────
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) { navigate('/login'); return; }
-    fetchCart();
-  }, );
+ useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    navigate('/login');
+    return;
+  }
+  fetchCart();
+}, []);   // ✅ RUN ONLY ONCE
 
   const fetchCart = async () => {
     try {
@@ -177,7 +180,7 @@ const Checkout = () => {
           email_address: formData.email
         };
 
-        await api.put(`/api/orders/${order._id}/pay`, paymentPayload);
+        await api.put(`/orders/${order._id}/pay`, paymentPayload);
       }
 
       // ── Step C: success ───────────────────────────────────────────────────
