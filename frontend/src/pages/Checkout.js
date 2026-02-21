@@ -50,7 +50,7 @@ const Checkout = () => {
     return;
   }
   fetchCart();
-}, []);   // ✅ RUN ONLY ONCE
+}, [navigate]);   // ✅ RUN ONLY ONCE
 
   const fetchCart = async () => {
     try {
