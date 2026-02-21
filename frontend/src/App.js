@@ -10,7 +10,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
-import AdminPanel from "./pages/AdminPanel";
+// import AdminPanel from "./pages/AdminPanel";
 import ProductDetail from "./pages/Productdetail";
 import Footer from "./components/Footer";
 import About from "./pages/About";
@@ -64,14 +64,14 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<AdminPanel />} />
+            {/* <Route path="/admin" element={<AdminPanel />} /> */}
             <Route path="/signup" element={<Signup />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<AdminPanel />} />
+            {/* <Route path="/admin" element={<AdminPanel />} /> */}
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
