@@ -1,5 +1,5 @@
 import React, { useState, useEffect ,useCallback} from 'react';
-import { useSearchParams, useNavigate,  } from 'react-router-dom';
+import { useSearchParams,   } from 'react-router-dom';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
@@ -7,13 +7,13 @@ import './Products.css';
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [page, setPage] = useState(1);
-const [sortBy, setSortBy] = useState('newest');
+//   const [page, setPage] = useState(1);
+// const [sortBy, setSortBy] = useState('newest');
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,7 +69,10 @@ const [sortBy, setSortBy] = useState('newest');
       }
       
 const { data } = await api.get('/products', {
-  params: { page, sortBy }
+  params: { 
+    page: currentPage,
+    sortBy: filters.sortBy 
+  }
 });
 
       let filteredProducts = data.products;

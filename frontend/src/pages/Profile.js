@@ -170,7 +170,7 @@ const Profile = () => {
     // const token = localStorage.getItem('token');
 
     try {
-      const { data } = await api.put('/auth/profile', {
+     await api.put('/auth/profile', {
   password: formData.newPassword,
 });
 

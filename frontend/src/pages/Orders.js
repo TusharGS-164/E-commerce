@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import axios from 'axios';
 import api from '../services/api';
 
@@ -18,7 +18,7 @@ import {
 import './Orders.css';
 
 const Orders = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
