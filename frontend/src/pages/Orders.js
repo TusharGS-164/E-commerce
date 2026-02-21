@@ -27,27 +27,27 @@ const Orders = () => {
 
   useEffect(() => {
     fetchOrders();
-  }, );
+  }, []);
 
-  const fetchOrders = async () => {
-    // const token = localStorage.getItem('token');
-    // if (!token) {
+  // const token = localStorage.getItem('token');
+  // if (!token) {
     //   navigate('/login');
     //   return;
     // }
-
-    setLoading(true);
-    try {
+   const fetchOrders = async () => {
+  setLoading(true);
+  try {
     const { data } = await api.get('/orders/user/myorders');
-
-      setOrders(data);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to load orders');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+    console.log("Orders:", data);
+    setOrders(data);
+  } catch (err) {
+    console.log("ERROR STATUS:", err.response?.status);
+    console.log("ERROR DATA:", err.response?.data);
+    setError(err.response?.data?.message || 'Failed to load orders');
+  } finally {
+    setLoading(false);
+  }
+};
   const getStatusIcon = (status) => {
     switch (status) {
       case 'pending':
