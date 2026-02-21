@@ -31,10 +31,10 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     // const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
+    // if (!token) {
+    //   navigate('/login');
+    //   return;
+    // }
 
     setLoading(true);
     try {

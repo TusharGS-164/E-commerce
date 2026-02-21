@@ -59,10 +59,10 @@ const Profile = () => {
 
   const fetchUserProfile = async () => {
     // const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
+    // if (!token) {
+    //   navigate('/login');
+    //   return;
+    // }
 
     try {
       const { data } = await api.get('/auth/me');
