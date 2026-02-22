@@ -343,7 +343,7 @@ const Orders = () => {
                               <p className="item-qty">Quantity: {item.quantity}</p>
                             </div>
                             <div className="item-price">
-                              ${(item.price * item.quantity).toFixed(2)}
+                            ₹{(item.price * item.quantity).toFixed(2)}
                             </div>
                           </div>
                         ))}

@@ -108,17 +108,19 @@ const Header = () => {
     <header className="header">
       <div className="header-inner">
 
-        {/* ── Logo ──────────────────────────────────────── */}
-        <Link to="/" className="header-logo">
-          <span className="header-logo-icon"><img 
-      src="../assets/logo.png" 
-      alt="Example" 
-      style = {{height:"40px"}}
-    /></span>
-          <span className="header-logo-text">
-           TechNest
-          </span>
-        </Link>
+      {/* ── Logo ──────────────────────────────────────── */}
+<Link to="/" className="header-logo">
+  <span className="header-logo-icon">
+    <img 
+      src={"../assets/logo.png"}
+      alt="TechNest Logo"
+      style={{ height: "40px" }}
+    />
+  </span>
+  <span className="header-logo-text">
+    TechNest
+  </span>
+</Link>
 
         {/* ── Search ────────────────────────────────────── */}
         <div className="header-search-wrap" ref={searchWrapRef}>

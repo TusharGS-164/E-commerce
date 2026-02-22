@@ -279,7 +279,7 @@ const Checkout = () => {
                   <div className="form-group">
                     <label>Full Name *</label>
                     <input name="fullName" value={formData.fullName}
-                      onChange={handleInputChange} placeholder="John Doe"
+                      onChange={handleInputChange} placeholder="Tushar GS"
                       className={errors.fullName ? 'error' : ''} />
                     {errors.fullName && <span className="error-text">{errors.fullName}</span>}
                   </div>
@@ -287,7 +287,7 @@ const Checkout = () => {
                   <div className="form-group">
                     <label>Email *</label>
                     <input name="email" type="email" value={formData.email}
-                      onChange={handleInputChange} placeholder="john@example.com"
+                      onChange={handleInputChange} placeholder="tushar@technest.com"
                       className={errors.email ? 'error' : ''} />
                     {errors.email && <span className="error-text">{errors.email}</span>}
                   </div>
@@ -304,7 +304,7 @@ const Checkout = () => {
                 <div className="form-group">
                   <label>Street Address *</label>
                   <input name="street" value={formData.street}
-                    onChange={handleInputChange} placeholder="123 Main Street, Apartment 4B"
+                    onChange={handleInputChange} placeholder="Mantralayam Road"
                     className={errors.street ? 'error' : ''} />
                   {errors.street && <span className="error-text">{errors.street}</span>}
                 </div>
@@ -313,7 +313,7 @@ const Checkout = () => {
                   <div className="form-group">
                     <label>City *</label>
                     <input name="city" value={formData.city}
-                      onChange={handleInputChange} placeholder="Bangalore"
+                      onChange={handleInputChange} placeholder="Raichur"
                       className={errors.city ? 'error' : ''} />
                     {errors.city && <span className="error-text">{errors.city}</span>}
                   </div>
@@ -331,7 +331,7 @@ const Checkout = () => {
                   <div className="form-group">
                     <label>ZIP Code *</label>
                     <input name="zipCode" value={formData.zipCode}
-                      onChange={handleInputChange} placeholder="560001"
+                      onChange={handleInputChange} placeholder="584101"
                       className={errors.zipCode ? 'error' : ''} />
                     {errors.zipCode && <span className="error-text">{errors.zipCode}</span>}
                   </div>
@@ -403,7 +403,7 @@ const Checkout = () => {
                     <div className="form-group">
                       <label>Cardholder Name *</label>
                       <input name="cardName" value={formData.cardName}
-                        onChange={handleInputChange} placeholder="JOHN DOE"
+                        onChange={handleInputChange} placeholder="Tushar GS"
                         className={errors.cardName ? 'error' : ''} />
                       {errors.cardName && <span className="error-text">{errors.cardName}</span>}
                     </div>
