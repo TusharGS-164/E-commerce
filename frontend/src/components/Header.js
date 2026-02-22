@@ -110,7 +110,11 @@ const Header = () => {
 
         {/* ── Logo ──────────────────────────────────────── */}
         <Link to="/" className="header-logo">
-          <span className="header-logo-icon">⚡</span>
+          <span className="header-logo-icon"><img 
+      src="../assets/logo.png" 
+      alt="Example" 
+      style = {{height:"40px"}}
+    /></span>
           <span className="header-logo-text">
            TechNest
           </span>

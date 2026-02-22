@@ -9,6 +9,7 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   position: sticky;
   top: 0;
+  padding: 15px;
   z-index: 1000;
   box-shadow: 0 4px 24px rgba(102, 126, 234, 0.35);
 }
