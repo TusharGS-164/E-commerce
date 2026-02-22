@@ -289,7 +289,7 @@ const Header = () => {
 
       {/* ── Mobile menu ───────────────────────────────────── */}
       <div className={`header-mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
-        <Link to="/products" className="mobile-link">Shop</Link>
+        {/* <Link to="/products" className="mobile-link">Shop</Link> */}
         {user ? (
           <>
             <Link to="/cart" className="mobile-link">

@@ -332,14 +332,14 @@ const Cart = () => {
             </div>
 
           
-            <div className="promo-section">
+            {/* <div className="promo-section">
               <input
                 type="text"
                 placeholder="Enter promo code"
                 className="promo-input"
               />
               <button className="promo-btn">Apply</button>
-            </div>
+            </div> */}
 
             {/* Checkout Button */}
             <button className="checkout-btn" onClick={handleCheckout}>
