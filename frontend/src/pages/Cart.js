@@ -373,7 +373,7 @@ const Cart = () => {
             </div>
 
             {/* Payment Methods */}
-            <div className="payment-methods">
+            {/* <div className="payment-methods">
               <p>We Accept</p>
               <div className="payment-icons">
                 <div className="payment-icon">💳 Visa</div>
@@ -381,7 +381,7 @@ const Cart = () => {
                 <div className="payment-icon">💳 Amex</div>
                 <div className="payment-icon">💰 PayPal</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
