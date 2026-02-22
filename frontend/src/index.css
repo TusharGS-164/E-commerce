@@ -25,6 +25,9 @@
   }
 }
 
+body {
+  overflow-x: hidden;
+}
 /* Custom component classes */
 @layer components {
   .btn-primary {

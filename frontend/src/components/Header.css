@@ -1,5 +1,6 @@
 /* ============================================================
    Header.css  —  TechNest Header
+   Fully responsive: desktop → tablet → phone → tiny
    Purple gradient theme: #667eea → #764ba2
    ============================================================ */
 
@@ -8,16 +9,17 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   position: sticky;
   top: 0;
-  padding: 15px;
   z-index: 1000;
   box-shadow: 0 4px 24px rgba(102, 126, 234, 0.35);
 }
 
-/* Thin shimmer line at the very bottom */
+/* Thin shimmer line at bottom */
 .header::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 1px;
   background: rgba(255, 255, 255, 0.18);
 }
@@ -46,7 +48,7 @@
 .header-logo-icon {
   font-size: 1.55rem;
   line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,.2));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .header-logo-text {
@@ -122,7 +124,9 @@
   flex-shrink: 0;
   transition: background 0.2s;
 }
-.search-clear-btn:hover { background: rgba(255, 255, 255, 0.32); }
+.search-clear-btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
 
 /* Submit button */
 .search-submit-btn {
@@ -139,7 +143,9 @@
   white-space: nowrap;
   transition: background 0.2s;
 }
-.search-submit-btn:hover { background: rgba(255, 255, 255, 0.32); }
+.search-submit-btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
 
 /* ── Search Dropdown ────────────────────────────────────────── */
 .search-dropdown {
@@ -157,8 +163,14 @@
 }
 
 @keyframes dropdownIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Section inside dropdown */
@@ -166,7 +178,9 @@
   padding: 0.9rem 1rem 0.75rem;
   border-bottom: 1px solid #f3f4f6;
 }
-.search-section:last-child { border-bottom: none; }
+.search-section:last-child {
+  border-bottom: none;
+}
 
 .search-section-label {
   display: flex;
@@ -179,7 +193,9 @@
   color: #9ca3af;
   margin-bottom: 0.7rem;
 }
-.search-section-label svg { flex-shrink: 0; }
+.search-section-label svg {
+  flex-shrink: 0;
+}
 
 /* Category pills */
 .search-cat-pills {
@@ -227,7 +243,11 @@
   flex-shrink: 0;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* Result rows */
 .search-result-row {
@@ -243,7 +263,9 @@
   text-align: left;
   transition: background 0.15s;
 }
-.search-result-row:hover { background: #f9fafb; }
+.search-result-row:hover {
+  background: #f9fafb;
+}
 
 .search-result-img {
   width: 44px;
@@ -306,7 +328,9 @@
   transition: color 0.15s;
   margin-top: 0.25rem;
 }
-.search-see-all:hover { color: #764ba2; }
+.search-see-all:hover {
+  color: #764ba2;
+}
 
 /* No results */
 .search-no-results {
@@ -342,7 +366,9 @@
 }
 
 /* Cart */
-.header-cart-link { position: relative; }
+.header-cart-link {
+  position: relative;
+}
 
 .header-cart-badge {
   position: absolute;
@@ -376,7 +402,7 @@
 }
 .header-signup-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 /* ── User menu ──────────────────────────────────────────────── */
@@ -407,7 +433,7 @@
 .header-avatar {
   width: 30px;
   height: 30px;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -416,7 +442,12 @@
   font-size: 0.85rem;
 }
 
-.header-user-name { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.header-user-name {
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 /* Dropdown panel */
 .header-dropdown {
@@ -426,7 +457,7 @@
   width: 220px;
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
   border: 1px solid rgba(102, 126, 234, 0.1);
   opacity: 0;
   visibility: hidden;
@@ -447,12 +478,27 @@
 /* Dropdown user info block */
 .header-dropdown-info {
   padding: 0.9rem 1rem 0.75rem;
-  background: linear-gradient(135deg, rgba(102,126,234,.07), rgba(118,75,162,.07));
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.07), rgba(118, 75, 162, 0.07));
 }
-.hdi-name  { font-weight: 700; font-size: 0.9rem; color: #1f2937; margin-bottom: 0.15rem; }
-.hdi-email { font-size: 0.78rem; color: #9ca3af; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hdi-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1f2937;
+  margin-bottom: 0.15rem;
+}
+.hdi-email {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-.header-dropdown-hr { border: none; border-top: 1px solid #f3f4f6; margin: 0; }
+.header-dropdown-hr {
+  border: none;
+  border-top: 1px solid #f3f4f6;
+  margin: 0;
+}
 
 .header-dropdown-item {
   display: flex;
@@ -469,10 +515,19 @@
   text-decoration: none;
   transition: background 0.15s, color 0.15s;
 }
-.header-dropdown-item:hover { background: #f9fafb; color: #667eea; }
-.hdi-admin  { color: #667eea; }
-.hdi-logout { color: #ef4444 !important; }
-.hdi-logout:hover { background: #fff5f5 !important; }
+.header-dropdown-item:hover {
+  background: #f9fafb;
+  color: #667eea;
+}
+.hdi-admin {
+  color: #667eea;
+}
+.hdi-logout {
+  color: #ef4444 !important;
+}
+.hdi-logout:hover {
+  background: #fff5f5 !important;
+}
 
 /* ── Hamburger ──────────────────────────────────────────────── */
 .header-hamburger {
@@ -482,8 +537,8 @@
   gap: 5px;
   width: 36px;
   height: 36px;
-  background: rgba(255,255,255,0.15);
-  border: 1.5px solid rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
   border-radius: 8px;
   cursor: pointer;
   padding: 0 8px;
@@ -498,18 +553,25 @@
   transition: all 0.25s;
 }
 
-.header-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.header-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.header-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.header-hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.header-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.header-hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ── Mobile menu ────────────────────────────────────────────── */
 .header-mobile-menu {
   display: none;
   flex-direction: column;
-  background: rgba(0,0,0,0.18);
+  background: rgba(0, 0, 0, 0.18);
   padding: 0.75rem 1.5rem 1.25rem;
   gap: 0.2rem;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
@@ -523,12 +585,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0.6rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: none;
   border-left: none;
   border-right: none;
@@ -538,23 +600,59 @@
   text-align: left;
   transition: color 0.2s;
 }
-.mobile-link:hover       { color: #fff; }
-.mobile-link:last-child  { border-bottom: none; }
-.mobile-badge            { background: #f43f5e; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 9999px; }
-.mobile-logout           { color: #fca5a5 !important; }
-.mobile-signup           { color: #fff; font-weight: 700; }
-
-/* ── Responsive breakpoints ─────────────────────────────────── */
-@media (max-width: 900px) {
-  .header-user-name { display: none; }
+.mobile-link:hover {
+  color: #fff;
+}
+.mobile-link:last-child {
+  border-bottom: none;
+}
+.mobile-badge {
+  background: #f43f5e;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px;
+}
+.mobile-logout {
+  color: #fca5a5 !important;
+}
+.mobile-signup {
+  color: #fff;
+  font-weight: 700;
 }
 
+/* ────────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+───────────────────────────────────────────────────────────── */
+
+/* ── Large tablets: 1024px ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .header-search-wrap {
+    max-width: 480px;
+  }
+}
+
+/* ── Medium tablets: 900px ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .header-user-name {
+    display: none;
+  }
+
+  .header-search-wrap {
+    max-width: 420px;
+  }
+}
+
+/* ── Tablets: 768px ─────────────────────────────────────────── */
 @media (max-width: 768px) {
   .header-inner {
     padding: 0 1rem;
     height: 58px;
+    gap: 0.9rem;
   }
 
+  /* Hide desktop nav, show hamburger */
   .header-nav {
     display: none;
   }
@@ -567,10 +665,12 @@
     display: flex;
   }
 
+  /* Search takes full width */
   .header-search-wrap {
     max-width: none;
   }
 
+  /* Hide submit button on tablet/mobile */
   .search-submit-btn {
     display: none;
   }
@@ -580,7 +680,75 @@
   }
 }
 
+/* ── Phones: 480px ──────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .header-logo-text { font-size: 1.2rem; }
-  .search-cat-pill  { font-size: 0.75rem; padding: 0.25rem 0.65rem; }
+  .header-inner {
+    padding: 0 0.75rem;
+    height: 56px;
+    gap: 0.6rem;
+  }
+
+  /* Smaller logo */
+  .header-logo-icon {
+    font-size: 1.35rem;
+  }
+
+  .header-logo-text {
+    font-size: 1.15rem;
+  }
+
+  /* Smaller search input */
+  .header-search-input {
+    font-size: 0.88rem;
+  }
+
+  .header-search-input::placeholder {
+    font-size: 0.85rem;
+  }
+
+  /* Smaller category pills in dropdown */
+  .search-cat-pill {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  /* Tighter mobile menu */
+  .header-mobile-menu {
+    padding: 0.65rem 1rem 1rem;
+  }
+
+  .mobile-link {
+    font-size: 0.9rem;
+    padding: 0.55rem 0;
+  }
+}
+
+/* ── Tiny phones: 360px ─────────────────────────────────────── */
+@media (max-width: 360px) {
+  .header-inner {
+    padding: 0 0.65rem;
+    gap: 0.5rem;
+  }
+
+  .header-logo-icon {
+    font-size: 1.25rem;
+  }
+
+  .header-logo-text {
+    font-size: 1.05rem;
+  }
+
+  .header-search-input {
+    font-size: 0.85rem;
+  }
+
+  .search-cat-pill {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+  }
+
+  .header-hamburger {
+    width: 32px;
+    height: 32px;
+  }
 }
