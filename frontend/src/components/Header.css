@@ -7,8 +7,7 @@
 /* ── Header wrapper ─────────────────────────────────────────── */
 .header {
   width: 100%;
-  background: linear-gradient(124deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
+background: linear-gradient(90deg, #5f5fff 0%, #7b3fe4 100%);  color: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;

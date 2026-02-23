@@ -290,7 +290,7 @@ const Header = () => {
           ) : (
             <>
               <Link to="/login"    className="header-nav-link">Login</Link>
-              <Link to="/register" className="header-signup-btn">Sign Up</Link>
+              <Link to="/signup" className="header-signup-btn">Sign Up</Link>
             </>
           )}
         </nav>
@@ -326,7 +326,7 @@ const Header = () => {
         ) : (
           <>
             <Link to="/login"    className="mobile-link">Login</Link>
-            <Link to="/register" className="mobile-link mobile-signup">Sign Up</Link>
+            <Link to="/signup" className="mobile-link mobile-signup">Sign Up</Link>
           </>
         )}
       </div>
