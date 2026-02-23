@@ -37,7 +37,7 @@ const ProductCard = ({ product, onAddToCart }) => {
         </div>
 
         <div className="product-footer">
-          <div className="product-price">₹{product.price?.toFixed(2)}</div>
+          <div className="product-price">₹{product.price?.toLocaleString('en-IN')}</div>
           
           <button
             onClick={handleAddToCart}

@@ -11,15 +11,56 @@ router.get('/', async (req, res) => {
     const pageSize = 12;
     const page = Number(req.query.page) || 1;
     
-    const keyword = req.query.keyword ? {
-      name: {
-        $regex: req.query.keyword,
-        $options: 'i'
-      }
+    // Smart keyword mapping for common search terms
+    let searchKeyword = req.query.keyword;
+    if (searchKeyword) {
+      const keywordMap = {
+        'phone': 'Smartphones & Tablets',
+        'phones': 'Smartphones & Tablets',
+        'mobile': 'Smartphones & Tablets',
+        'mobiles': 'Smartphones & Tablets',
+        'laptop': 'laptop',
+        'laptops': 'laptop',
+        'computer': 'laptop',
+        'computers': 'laptop',
+        'headphone': 'audio',
+        'headphones': 'audio',
+        'earphone': 'audio',
+        'earphones': 'audio',
+        'earbud': 'audio',
+        'earbuds': 'audio',
+        'speaker': 'audio',
+        'speakers': 'audio',
+        'watch': 'wearable',
+        'watches': 'wearable',
+        'smartwatch': 'wearable',
+        'smartwatches': 'wearable',
+        'camera': 'camera',
+        'cameras': 'camera',
+        'gaming': 'Gaming',
+        'game': 'gaming',
+        'games': 'gaming'
+      };
+      
+      const lowerKeyword = searchKeyword.toLowerCase().trim();
+      // Check if there's a mapping, otherwise use original keyword
+searchKeyword = keywordMap[lowerKeyword] || lowerKeyword; 
+searchKeyword = searchKeyword.trim();
+   }
+    
+    // Enhanced search across multiple fields
+    const keyword = searchKeyword ? {
+      $or: [
+        { name: { $regex: searchKeyword, $options: 'i' } },
+        { category: { $regex: searchKeyword, $options: 'i' } },
+        { brand: { $regex: searchKeyword, $options: 'i' } },
+        { description: { $regex: searchKeyword, $options: 'i' } }
+      ]
     } : {};
 
-    const category = req.query.category ? { category: req.query.category } : {};
-
+const category = req.query.category
+  ? { category: { $regex: req.query.category.trim(), $options: 'i' } }
+  : {};
     const count = await Product.countDocuments({ ...keyword, ...category });
     const products = await Product.find({ ...keyword, ...category })
       .limit(pageSize)
@@ -33,7 +74,7 @@ router.get('/', async (req, res) => {
       total: count
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
@@ -42,17 +83,12 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/featured', async (req, res) => {
   try {
-    const products = await Product.find({ featured: true }).limit(10);
-
-    res.json({
-      products
-    });
-
+    const products = await Product.find({ featured: true }).limit(8);
+    res.json(products);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
-
 
 // @route   GET /api/products/:id
 // @desc    Get product by ID

@@ -5,7 +5,16 @@ import { useAuthStore, useCartStore } from '../store';
 import api from '../services/api';
 import './Header.css';
 
-const CATEGORIES = ['Electronics', 'Clothing', 'Books', 'Home', 'Sports', 'Toys', 'Other'];
+// Tech-focused categories for TechNest electronics store
+const CATEGORIES = [
+  'Smartphones & Tablets',
+  'Computers & Laptops',
+  'Gaming',
+  'Cameras & Photography',
+  'Electronics',
+  'Wearables',
+   'Accessories'
+];
 
 const Header = () => {
   const { user, logout }  = useAuthStore();
@@ -44,13 +53,15 @@ const Header = () => {
 
   // Live search with 300ms debounce
   const liveSearch = useCallback(async (q) => {
-    if (!q.trim()) {
+    // Require at least 2 characters for better search results
+    if (!q.trim() || q.trim().length < 2) {
       setResults([]);
       return;
     }
     setSearching(true);
     try {
-      const { data } = await api.get(`/products?search=${encodeURIComponent(q)}&limit=6`);
+      // Use 'keyword' parameter to match backend API
+      const { data } = await api.get(`/products?keyword=${encodeURIComponent(q)}&limit=6`);
       const list = Array.isArray(data) ? data : (data.products || []);
       setResults(list.slice(0, 6));
     } catch {
@@ -108,19 +119,18 @@ const Header = () => {
     <header className="header">
       <div className="header-inner">
 
-      {/* ── Logo ──────────────────────────────────────── */}
-<Link to="/" className="header-logo">
-  <span className="header-logo-icon">
-    <img 
-      src={"../assets/logo.png"}
-      alt="TechNest Logo"
-      style={{ height: "40px" }}
-    />
-  </span>
-  <span className="header-logo-text">
-    TechNest
-  </span>
-</Link>
+        {/* ── Logo ──────────────────────────────────────── */}
+        <Link to="/" className="header-logo">
+          <span className="header-logo-icon">
+            <img
+            src='../assets/logo.png'
+            alt='logo'
+            style={{height: "40px"}}/>
+          </span>
+          <span className="header-logo-text">
+            TechNest
+          </span>
+        </Link>
 
         {/* ── Search ────────────────────────────────────── */}
         <div className="header-search-wrap" ref={searchWrapRef}>
@@ -183,6 +193,8 @@ const Header = () => {
                       <span className="search-spinner" />
                       <span>Searching…</span>
                     </div>
+                  ) : query.trim().length < 2 ? (
+                    <p className="search-no-results">Type at least 2 characters to search</p>
                   ) : results.length > 0 ? (
                     <>
                       {results.map((p) => (
@@ -278,7 +290,7 @@ const Header = () => {
           ) : (
             <>
               <Link to="/login"    className="header-nav-link">Login</Link>
-              <Link to="/signup" className="header-signup-btn">Sign Up</Link>
+              <Link to="/register" className="header-signup-btn">Sign Up</Link>
             </>
           )}
         </nav>
@@ -295,7 +307,7 @@ const Header = () => {
 
       {/* ── Mobile menu ───────────────────────────────────── */}
       <div className={`header-mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
-        {/* <Link to="/products" className="mobile-link">Shop</Link> */}
+        <Link to="/products" className="mobile-link">Shop</Link>
         {user ? (
           <>
             <Link to="/cart" className="mobile-link">

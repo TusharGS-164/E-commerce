@@ -1,22 +1,31 @@
+/* ============================================================
+   ProductCard.css  —  TechNest Product Card
+   Optimized for 2-column mobile layout
+   Design: purple gradient #667eea → #764ba2
+   ============================================================ */
+
+/* ── Base Card ──────────────────────────────────────────────── */
 .product-card {
-  background: white;
+  background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
 }
 
+/* ── Product Image ──────────────────────────────────────────── */
 .product-image {
   position: relative;
   width: 100%;
-  height: 250px;
+  aspect-ratio: 1 / 1; /* Square aspect ratio */
   background: #f8f9fa;
   overflow: hidden;
 }
@@ -25,95 +34,264 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s;
+  transition: transform 0.4s ease;
 }
 
 .product-card:hover .product-image img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .out-of-stock {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #e74c3c;
-  color: white;
-  padding: 6px 12px;
+  top: 0.65rem;
+  right: 0.65rem;
+  background: #ef4444;
+  color: #fff;
+  padding: 0.4rem 0.85rem;
   border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+  z-index: 1;
 }
 
+/* ── Product Info ───────────────────────────────────────────── */
 .product-info {
-  padding: 20px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   flex: 1;
+  gap: 0.35rem;
 }
 
 .product-name {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 5px;
-  color: #333;
+  color: #1f2937;
+  line-height: 1.4;
+  /* Limit to 2 lines */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 2.6rem; /* Reserve space for 2 lines */
 }
 
 .product-brand {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-top: -0.1rem;
 }
 
 .product-rating {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+}
+
+.product-rating svg {
+  flex-shrink: 0;
 }
 
 .review-count {
-  color: #666;
+  color: #9ca3af;
+  font-size: 0.8rem;
 }
 
+/* ── Product Footer ─────────────────────────────────────────── */
 .product-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.75rem;
   margin-top: auto;
-  padding-top: 15px;
-  border-top: 1px solid #f0f0f0;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f3f4f6;
 }
 
 .product-price {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: #667eea;
+  letter-spacing: -0.3px;
 }
 
 .add-cart-btn {
-  background: #667eea;
-  color: white;
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
   border: none;
-  padding: 10px 16px;
+  padding: 0.7rem 1rem;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
-  gap: 6px;
-  transition: all 0.3s;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
 }
 
 .add-cart-btn:hover:not(:disabled) {
-  background: #5568d3;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+}
+
+.add-cart-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .add-cart-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+}
+
+/* ────────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+───────────────────────────────────────────────────────────── */
+
+/* Desktop: optimize for larger cards */
+@media (min-width: 769px) {
+  .product-name {
+    font-size: 1.05rem;
+  }
+
+  .product-info {
+    padding: 1.25rem;
+  }
+
+  .product-price {
+    font-size: 1.4rem;
+  }
+
+  .add-cart-btn {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablets: 481px - 768px */
+@media (max-width: 768px) and (min-width: 481px) {
+  .product-image {
+    aspect-ratio: 4 / 3; /* Slightly wider on tablets */
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-name {
+    font-size: 0.95rem;
+  }
+
+  .product-price {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile: 2-column layout optimization */
+@media (max-width: 480px) {
+  .product-card {
+    border-radius: 10px;
+  }
+
+  .product-image {
+    aspect-ratio: 1 / 1; /* Keep square for 2-column */
+  }
+
+  .product-info {
+    padding: 0.85rem;
+    gap: 0.25rem;
+  }
+
+  .product-name {
+    font-size: 0.9rem;
+    line-height: 1.35;
+    min-height: 2.4rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .product-brand {
+    font-size: 0.75rem;
+  }
+
+  .product-rating {
+    font-size: 0.8rem;
+    margin-top: 0.1rem;
+  }
+
+  .review-count {
+    font-size: 0.75rem;
+  }
+
+  .product-footer {
+    gap: 0.65rem;
+    padding-top: 0.65rem;
+  }
+
+  .product-price {
+    font-size: 1.15rem;
+  }
+
+  .add-cart-btn {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.82rem;
+    gap: 0.4rem;
+  }
+
+  .out-of-stock {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.65rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+/* Extra small phones: < 360px */
+@media (max-width: 360px) {
+  .product-info {
+    padding: 0.75rem;
+  }
+
+  .product-name {
+    font-size: 0.85rem;
+    min-height: 2.3rem;
+  }
+
+  .product-brand {
+    font-size: 0.7rem;
+  }
+
+  .product-rating {
+    font-size: 0.75rem;
+  }
+
+  .product-price {
+    font-size: 1.05rem;
+  }
+
+  .add-cart-btn {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* ── Hover effects disabled on touch devices ────────────────── */
+@media (hover: none) {
+  .product-card:hover {
+    transform: none;
+  }
+
+  .product-card:hover .product-image img {
+    transform: none;
+  }
+
+  .add-cart-btn:hover:not(:disabled) {
+    transform: none;
+  }
 }

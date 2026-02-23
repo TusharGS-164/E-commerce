@@ -1,19 +1,18 @@
-import React, { useState, useEffect ,useCallback} from 'react';
-import { useSearchParams,   } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
+import toast from 'react-hot-toast';
 import './Products.css';
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-//   const [page, setPage] = useState(1);
-// const [sortBy, setSortBy] = useState('newest');
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,54 +46,79 @@ const Products = () => {
   ];
 
   const fetchProducts = useCallback(async () => {
-  setLoading(true);
-  setError('');
+    setLoading(true);
+    setError('');
 
-  try {
-    const queryParams = {
-      page: currentPage,
-      sortBy: filters.sortBy,
-    };
+    try {
+      const queryParams = {
+        page: currentPage,
+        sortBy: filters.sortBy,
+      };
 
-    if (filters.search) {
-      queryParams.keyword = filters.search;
+      if (filters.search) {
+        queryParams.keyword = filters.search;
+      }
+
+      if (filters.category && filters.category !== 'All Categories') {
+        queryParams.category = filters.category;
+      }
+
+      if (filters.minPrice) {
+        queryParams.minPrice = filters.minPrice;
+      }
+
+      if (filters.maxPrice) {
+        queryParams.maxPrice = filters.maxPrice;
+      }
+
+      if (filters.inStock) {
+        queryParams.inStock = true;
+      }
+
+      const { data } = await api.get('/products', {
+        params: queryParams,
+      });
+
+      // Handle both response formats
+      if (Array.isArray(data)) {
+        // Simple array response
+        setProducts(data);
+        setTotalPages(1);
+        setTotalProducts(data.length);
+      } else {
+        // Paginated response
+        setProducts(data.products || []);
+        setTotalPages(data.pages || 1);
+        setTotalProducts(data.total || 0);
+      }
+
+    } catch (err) {
+      setError('Failed to load products. Please try again.');
+      console.error('Products fetch error:', err);
+      toast.error('Failed to load products');
+    } finally {
+      setLoading(false);
     }
-
-    if (filters.category && filters.category !== 'All Categories') {
-      queryParams.category = filters.category;
-    }
-
-    if (filters.minPrice) {
-      queryParams.minPrice = filters.minPrice;
-    }
-
-    if (filters.maxPrice) {
-      queryParams.maxPrice = filters.maxPrice;
-    }
-
-    if (filters.inStock) {
-      queryParams.inStock = true;
-    }
-
-    const { data } = await api.get('/products', {
-      params: queryParams,
-    });
-
-    setProducts(data.products || []);
-    setTotalPages(data.pages || 1);
-    setTotalProducts(data.total || 0);
-
-  } catch (err) {
-    setError('Failed to load products. Please try again.');
-    console.error(err);
-  } finally {
-    setLoading(false);
-  }
-}, [currentPage, filters]);
+  }, [currentPage, filters]);
   
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
+
+  // Sync filters with URL params on mount
+  useEffect(() => {
+    const newFilters = {
+      search: searchParams.get('search') || '',
+      category: searchParams.get('category') || '',
+      minPrice: searchParams.get('minPrice') || '',
+      maxPrice: searchParams.get('maxPrice') || '',
+      sortBy: searchParams.get('sortBy') || 'newest',
+      inStock: searchParams.get('inStock') === 'true'
+    };
+    setFilters(newFilters);
+    setTempFilters(newFilters);
+  }, [searchParams]);
+
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
     setTempFilters({
@@ -111,7 +135,7 @@ const Products = () => {
     // Update URL params
     const params = new URLSearchParams();
     Object.keys(tempFilters).forEach(key => {
-      if (tempFilters[key]) {
+      if (tempFilters[key] && tempFilters[key] !== '') {
         params.set(key, tempFilters[key]);
       }
     });
@@ -137,26 +161,46 @@ const Products = () => {
     e.preventDefault();
     setFilters({ ...filters, search: tempFilters.search });
     setCurrentPage(1);
+    
+    // Update URL
+    const params = new URLSearchParams(searchParams);
+    if (tempFilters.search) {
+      params.set('search', tempFilters.search);
+    } else {
+      params.delete('search');
+    }
+    setSearchParams(params);
   };
 
   const handleAddToCart = async (productId) => {
-    // const token = localStorage.getItem('token');
-    // if (!token) {
-    //   alert('Please login to add items to cart');
-    //   navigate('/login');
-    //   return;
-    // }
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error('Please login to add items to cart');
+      navigate('/login');
+      return;
+    }
 
     try {
-      await await api.post('/cart/add', {
-  productId,
-  quantity: 1
-});
-
-      alert('Added to cart!');
+      await api.post('/cart/add', {
+        productId,
+        quantity: 1
+      });
+      toast.success('Added to cart!');
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to add to cart');
+      toast.error(err.response?.data?.message || 'Failed to add to cart');
     }
+  };
+
+  const removeFilter = (filterName) => {
+    const newFilters = { ...filters, [filterName]: filterName === 'inStock' ? false : '' };
+    setFilters(newFilters);
+    setTempFilters(newFilters);
+    setCurrentPage(1);
+
+    // Update URL
+    const params = new URLSearchParams(searchParams);
+    params.delete(filterName);
+    setSearchParams(params);
   };
 
   return (
@@ -198,7 +242,7 @@ const Products = () => {
                   className="clear-search"
                   onClick={() => {
                     setTempFilters({ ...tempFilters, search: '' });
-                    setFilters({ ...filters, search: '' });
+                    removeFilter('search');
                   }}
                 >
                   <X size={18} />
@@ -247,9 +291,10 @@ const Products = () => {
                   placeholder="Min"
                   value={tempFilters.minPrice}
                   onChange={handleFilterChange}
-                  className="price-input1"
+                  className="price-input"
+                  min="0"
                 />
-                {/* <span>-</span> */}
+                <span className="price-separator">–</span>
                 <input
                   type="number"
                   name="maxPrice"
@@ -257,6 +302,7 @@ const Products = () => {
                   value={tempFilters.maxPrice}
                   onChange={handleFilterChange}
                   className="price-input"
+                  min="0"
                 />
               </div>
             </div>
@@ -309,31 +355,31 @@ const Products = () => {
                   {filters.search && (
                     <span className="filter-tag">
                       Search: "{filters.search}"
-                      <button onClick={() => setFilters({ ...filters, search: '' })}>×</button>
+                      <button onClick={() => removeFilter('search')}>×</button>
                     </span>
                   )}
                   {filters.category && (
                     <span className="filter-tag">
                       {filters.category}
-                      <button onClick={() => setFilters({ ...filters, category: '' })}>×</button>
+                      <button onClick={() => removeFilter('category')}>×</button>
                     </span>
                   )}
                   {filters.minPrice && (
                     <span className="filter-tag">
-                      Min: ${filters.minPrice}
-                      <button onClick={() => setFilters({ ...filters, minPrice: '' })}>×</button>
+                      Min: ₹{filters.minPrice}
+                      <button onClick={() => removeFilter('minPrice')}>×</button>
                     </span>
                   )}
                   {filters.maxPrice && (
                     <span className="filter-tag">
-                      Max: ${filters.maxPrice}
-                      <button onClick={() => setFilters({ ...filters, maxPrice: '' })}>×</button>
+                      Max: ₹{filters.maxPrice}
+                      <button onClick={() => removeFilter('maxPrice')}>×</button>
                     </span>
                   )}
                   {filters.inStock && (
                     <span className="filter-tag">
                       In Stock
-                      <button onClick={() => setFilters({ ...filters, inStock: false })}>×</button>
+                      <button onClick={() => removeFilter('inStock')}>×</button>
                     </span>
                   )}
                   <button className="clear-all-tags" onClick={clearFilters}>

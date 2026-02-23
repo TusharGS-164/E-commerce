@@ -45,7 +45,7 @@ const About = () => {
         <div className="container px-4 mx-auto">
           <h1>About TechNest</h1>
           <p className="hero-subtitle">
-            Bangalore's most trusted destination for premium tech products since 2016
+            Raichur's most trusted destination for premium tech products since 2022
           </p>
         </div>
       </section>
@@ -57,12 +57,12 @@ const About = () => {
             <div className="content-text">
               <h2>Our Story</h2>
               <p>
-                TechNest was born in 2016 from a simple frustration — finding genuine tech
+                TechNest was born in 2022 from a simple frustration — finding genuine tech
                 products at fair prices in India was harder than it should be. Our founders,
-                two engineers from IISc Bangalore, decided to change that.
+                two engineers from NIT-R, decided to change that.
               </p>
               <p>
-                What started as a small shop in Indiranagar with just 200 products has grown
+                What started as a small shop in Sathyanath colony with just 200 products has grown
                 into one of South India's most trusted online tech retailers, serving over
                 50,000 customers across the country.
               </p>
@@ -141,8 +141,8 @@ const About = () => {
             <div className="contact-card">
               <MapPin size={40} />
               <h4>Visit Us</h4>
-              <p>123 Tech Street, Indiranagar</p>
-              <p>Bangalore, Karnataka 560038</p>
+              <p>Mantralayam Road</p>
+              <p>Raichur, Karnataka 584101</p>
               <p>India</p>
             </div>
             <div className="contact-card">

@@ -77,7 +77,7 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                    placeholder="Tushar GS"
                     className="contact-input"
                     required
                   />
@@ -89,7 +89,7 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+                    placeholder="tushar@example.com"
                     className="contact-input"
                     required
                   />
@@ -171,8 +171,8 @@ const Contact = () => {
                 </div>
                 <div className="contact-info-body">
                   <h3>Visit Our Store</h3>
-                  <p>123 Tech Street, Indiranagar</p>
-                  <p>Bangalore, Karnataka 560038</p>
+                  <p>Mantralayam Road</p>
+                  <p>Raichur, Karnataka 584101</p>
                   <p>India</p>
                 </div>
               </div>
@@ -268,7 +268,7 @@ const Contact = () => {
           <div className="contact-map-wrapper">
             <iframe
               title="TechNest Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8362373!2d77.6410796!3d12.9715987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzE3LjgiTiA3N8KwMzgnMjcuOSJF!5e0!3m2!1sen!2sin!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d16283.492320259958!2d77.36192099613791!3d16.20445466600982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1771835751981!5m2!1sen!2sin"
               width="100%"
               height="450"
               style={{ border: 0 }}
@@ -278,7 +278,7 @@ const Contact = () => {
             />
           </div>
         </div>
-
+     
         {/* ── Quick help ───────────────────────────────── */}
         <div className="contact-quickhelp-section">
           <h2 className="contact-section-title">Quick Help</h2>
