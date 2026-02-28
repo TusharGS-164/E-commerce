@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 // import axios from 'axios';
 import api from '../services/api';
+import { useAuthStore } from '../store';
+
 
 import {
   ShoppingCart,
@@ -43,7 +45,7 @@ const ProductDetail = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   // User and cart
-  const [user, ] = useState(null);
+const { user } = useAuthStore();
   const [addingToCart, setAddingToCart] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
 
