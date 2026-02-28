@@ -20,7 +20,8 @@ const Home = () => {
   const fetchFeaturedProducts = async () => {
   try {
     const { data } = await api.get('/products/featured');
-    setFeaturedProducts(data.products);
+    console.log("Featured response:", data);
+    setFeaturedProducts(data.products || data);
    
   } catch (error) {
     toast.error('Failed to load products');

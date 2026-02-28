@@ -125,7 +125,7 @@ const Header = () => {
             <img
             src='../assets/logo.png'
             alt='logo'
-            style={{height: "40px"}}/>
+            style={{height: "50px"}}/>
           </span>
           <span className="header-logo-text">
             TechNest

@@ -49,18 +49,27 @@ const ProductDetail = () => {
 
 useEffect(() => {
   const fetchProduct = async () => {
-    try {
-    const { data } = await api.get(`/products/${id}`);
-setProduct(data);
+    setLoading(true);
+    setError('');
 
+    try {
+      const { data } = await api.get(`/products/${id}`);
+      setProduct(data);
+
+      const { data: relatedData } = await api.get('/products', {
+        params: { category: data.category }
+      });
+
+      setRelatedProducts(relatedData.products || relatedData);
     } catch (err) {
-      console.log(err);
+      setError(err.response?.data?.message || 'Failed to load product');
+    } finally {
+      setLoading(false);
     }
   };
 
   fetchProduct();
 }, [id]);
-
 
   const fetchProduct = async () => {
     setLoading(true);
