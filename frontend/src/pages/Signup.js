@@ -71,8 +71,8 @@ const Signup = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className="form-input with-icon"
-                  placeholder="John Doe"
-                  required
+                  placeholder="your name"
+                  required1
                 />
               </div>
             </div>
