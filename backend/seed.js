@@ -788,7 +788,7 @@ const products = [
   category: 'Wearables',
   brand: 'Apple',
   stock: 30,
-  images: ['https://tse4.mm.bing.net/th/id/OIP.yIzRAOoy6K_V84Q3f8Z_UgHaIf?pid=Api&P=0&h=180'],
+  images: ['https://www.techspot.com/images/products/2023/wearables/org/2023-09-20-product-4.jpg'],
   rating: 4.9,
   numReviews: 245,
   featured: true
