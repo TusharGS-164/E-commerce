@@ -87,7 +87,7 @@ const Products = () => {
         // Sort - handled on frontend since backend doesn't support all sort options
         // We'll sort the results after fetching
 
-        console.log("Fetching products with params:", queryParams);
+        // console.log("Fetching products with params:", queryParams);
 
         const { data } = await api.get("/products", {
           params: queryParams,
