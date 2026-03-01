@@ -58,7 +58,7 @@ export const useAuthStore = create((set) => ({
 
 // Cart Store
 export const useCartStore = create((set, get) => ({
-  cart: null,
+cart: { items: [] },
   loading: false,
   error: null,
 

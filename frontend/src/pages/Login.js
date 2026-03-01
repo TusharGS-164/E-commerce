@@ -81,11 +81,7 @@ const Login = () => {
             </Link>
           </p>
 
-          <div className="demo-credentials">
-            <p><strong>Demo Credentials:</strong></p>
-            <p>Email: admin@ecommerce.com</p>
-            <p>Password: admin123</p>
-          </div>
+         
         </div>
       </div>
     </div>
