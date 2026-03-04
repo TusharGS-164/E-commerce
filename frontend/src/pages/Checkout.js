@@ -547,7 +547,7 @@ const Checkout = () => {
           {/* ─── Order summary sidebar (steps 1 & 2 only) ─────────────── */}
           {currentStep !== 3 && (
             <div className="order-summary">
-              <h3>Order Summary</h3>
+              <h3>Order Summary</h3><br/>
 
               <div className="order-items">
                 {cart.items.map(item => (
@@ -564,7 +564,7 @@ const Checkout = () => {
                   </div>
                 ))}
               </div>
-
+<br/>
               <div className="order-totals">
                 <div className="order-total-row">
                   <span>Subtotal</span>
