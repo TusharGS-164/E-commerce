@@ -8,41 +8,36 @@ import './Cart.css';
 const Cart = () => {
   const navigate = useNavigate();
   const { user } = useAuthStore();
-
-  const {
-    cart,
-    loading,
-    updateCartItem,
-    removeFromCart,
-    getCartTotal,
-    getCartCount
-  } = useCartStore();
-
-  const items = cart?.items || [];
+  const { cart, loading, fetchCart, updateCartItem, removeFromCart } = useCartStore();
 
   useEffect(() => {
     if (!user) {
       toast.error('Please login to view your cart');
       navigate('/login');
+      return;
     }
-  }, [user, navigate]);
+    fetchCart();
+  }, [user, navigate, fetchCart]);
 
-  const handleQuantityChange = async (productId, newQuantity) => {
+  const items = cart?.items || [];
+
+  const handleQuantityChange = async (itemId, newQuantity) => {
     if (newQuantity < 1) return;
     try {
-      await updateCartItem(productId, newQuantity);
+      await updateCartItem(itemId, newQuantity);
       toast.success('Cart updated!');
     } catch (error) {
       toast.error('Failed to update quantity');
     }
   };
 
-  const handleRemoveItem = async (productId) => {
+  const handleRemoveItem = async (itemId) => {
     try {
-      await removeFromCart(productId);
+      await removeFromCart(itemId);
       toast.success('Item removed from cart');
     } catch (error) {
       toast.error('Failed to remove item');
+      console.error('Remove error:', error);
     }
   };
 
@@ -54,12 +49,18 @@ const Cart = () => {
     navigate('/checkout');
   };
 
-  const subtotal = getCartTotal();
+  // Calculate totals
+  const subtotal = items.reduce((total, item) => {
+    return total + (item.product?.price || 0) * item.quantity;
+  }, 0);
+
   const shipping = subtotal > 0 ? (subtotal > 1000 ? 0 : 50) : 0;
   const tax = subtotal * 0.18; // 18% GST
   const total = subtotal + shipping + tax;
 
-  if (loading) {
+  const totalItems = items.reduce((count, item) => count + item.quantity, 0);
+
+  if (loading && !cart) {
     return (
       <div className="cart-page">
         <div className="cart-container">
@@ -101,7 +102,7 @@ const Cart = () => {
             <ShoppingBag size={32} className="cart-header-icon" />
             <div>
               <h1 className="cart-title">Shopping Cart</h1>
-              <p className="cart-subtitle">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'} in your cart</p>
+              <p className="cart-subtitle">{totalItems} {totalItems === 1 ? 'item' : 'items'} in your cart</p>
             </div>
           </div>
           <Link to="/products" className="continue-shopping-link">
@@ -152,7 +153,7 @@ const Cart = () => {
                 <div className="cart-item-quantity">
                   <button 
                     className="qty-btn"
-                    onClick={() => handleQuantityChange(item.product?._id, item.quantity - 1)}
+                    onClick={() => handleQuantityChange(item._id, item.quantity - 1)}
                     disabled={item.quantity <= 1}
                   >
                     <Minus size={16} />
@@ -160,7 +161,7 @@ const Cart = () => {
                   <span className="qty-value">{item.quantity}</span>
                   <button 
                     className="qty-btn"
-                    onClick={() => handleQuantityChange(item.product?._id, item.quantity + 1)}
+                    onClick={() => handleQuantityChange(item._id, item.quantity + 1)}
                     disabled={item.quantity >= item.product?.stock}
                   >
                     <Plus size={16} />
@@ -173,7 +174,8 @@ const Cart = () => {
 
                 <button 
                   className="cart-item-remove"
-                  onClick={() => handleRemoveItem(item.product?._id)}
+                  onClick={() => handleRemoveItem(item._id)}
+                  title="Remove item"
                 >
                   <Trash2 size={18} />
                 </button>
@@ -191,7 +193,7 @@ const Cart = () => {
             </h2>
 
             <div className="summary-row">
-              <span>Subtotal ({getCartCount()} items)</span>
+              <span>Subtotal ({totalItems} items)</span>
               <span className="summary-value">₹{subtotal.toLocaleString('en-IN')}</span>
             </div>
 
@@ -205,7 +207,7 @@ const Cart = () => {
               </span>
             </div>
 
-            {shipping > 0 && (
+            {shipping > 0 && subtotal < 1000 && (
               <div className="free-shipping-notice">
                 <Tag size={16} />
                 Add ₹{(1000 - subtotal).toLocaleString('en-IN')} more for FREE shipping!

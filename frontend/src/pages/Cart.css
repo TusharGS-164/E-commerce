@@ -1,6 +1,6 @@
 /* ============================================================
-   Cart.css  —  TechNest Shopping Cart
-   Modern design with order summary below cart items
+   Cart.css  —  TechNest Shopping Cart (IMPROVED)
+   Fixed: Price overflow, better mobile layout
    Purple gradient theme: #667eea → #764ba2
    ============================================================ */
 
@@ -203,6 +203,7 @@
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
+  overflow: hidden; /* FIXED: Prevent overflow */
 }
 
 .cart-item-name {
@@ -239,12 +240,15 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0.4rem;
+  min-width: 0; /* FIXED: Prevent overflow */
+  overflow: hidden; /* FIXED: Prevent overflow */
 }
 
 .price {
   font-size: 1.1rem;
   font-weight: 700;
   color: #667eea;
+  word-break: break-word; /* FIXED: Break long numbers */
 }
 
 .low-stock-badge {
@@ -255,6 +259,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   border-radius: 9999px;
+  white-space: nowrap;
 }
 
 /* Quantity controls */
@@ -280,6 +285,7 @@
   color: #667eea;
   cursor: pointer;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .qty-btn:hover:not(:disabled) {
@@ -305,6 +311,7 @@
   font-size: 1.2rem;
   font-weight: 800;
   color: #1f2937;
+  word-break: break-word; /* FIXED: Break long numbers */
 }
 
 .cart-item-remove {
@@ -314,17 +321,22 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border: 1px solid #fecaca;
+  border: 2px solid #fecaca;
   border-radius: 8px;
   color: #ef4444;
   cursor: pointer;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .cart-item-remove:hover {
   background: #fef2f2;
   border-color: #ef4444;
   transform: scale(1.05);
+}
+
+.cart-item-remove:active {
+  transform: scale(0.95);
 }
 
 /* ── Order Summary Section (Below Items) ────────────────────── */
@@ -365,18 +377,21 @@
   padding: 0.85rem 0;
   font-size: 0.95rem;
   color: #6b7280;
+  gap: 1rem; /* FIXED: Add gap */
 }
 
 .summary-row span:first-child {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex: 1;
 }
 
 .summary-value {
   font-weight: 700;
   color: #1f2937;
   font-size: 1rem;
+  white-space: nowrap; /* FIXED: Prevent wrapping */
 }
 
 .free-badge {
@@ -565,9 +580,9 @@
   }
 
   .cart-item {
-    grid-template-columns: 80px 1fr 100px 40px;
+    grid-template-columns: 80px 1fr 110px 40px;
     gap: 0.75rem;
-    padding: 1rem 0.25rem;
+    padding: 1rem 0.5rem;
   }
 
   .cart-item-image {
@@ -603,6 +618,8 @@
   .cart-item {
     grid-template-columns: 70px 1fr;
     gap: 0.75rem;
+    position: relative;
+    padding: 1rem 0.5rem 3.5rem; /* Space for quantity controls */
   }
 
   .cart-item-image {
@@ -615,19 +632,19 @@
     width: 100%;
     justify-content: center;
     margin-top: 0.75rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 0.5rem;
+    right: 0.5rem;
   }
 
   .cart-item-remove {
     position: absolute;
-    top: 1rem;
+    top: 0.75rem;
     right: 0.5rem;
     width: 36px;
     height: 36px;
-  }
-
-  .cart-item {
-    position: relative;
-    padding-bottom: 3.5rem;
+    z-index: 1;
   }
 
   .order-summary {
@@ -636,10 +653,34 @@
 
   .summary-row {
     font-size: 0.9rem;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+  }
+
+  .summary-value {
+    font-size: 0.95rem;
   }
 
   .checkout-btn {
     padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .total-value {
+    font-size: 1.5rem;
+  }
+}
+
+/* Extra small: 360px */
+@media (max-width: 360px) {
+  .cart-item-details {
+    max-width: 100%;
+  }
+
+  .cart-item-name {
+    font-size: 0.9rem;
+  }
+
+  .price {
     font-size: 1rem;
   }
 }
